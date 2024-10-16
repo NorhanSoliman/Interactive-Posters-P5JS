@@ -1,123 +1,55 @@
 let player = 0; //0:x and 1:y
 function setup() {
-  createCanvas(600, 600); // Create a canvas
+  createCanvas(600, 800); // Create a canvas
   textSize(20); 
   frameRate(1);
+  angleMode(DEGREES);
 }
 
 function draw() {
 
-  background(220); // Set a background color
-  for (let i = 0; i <= width; i += 200) { 
-    line(i, 0, i, height); 
-  }
-  for (let i = 0; i <= height; i += 200) { 
-    line(0, i, 600, i); 
-  }
+  background('black'); // Set a background color
+  // for (let i = 0; i <= width; i += 200) { 
+  //   line(i, 0, i, height); 
+  // }
+  stroke('white');
+
+  // //line(50,50,50,150);
+  //  // Translate to the center of the line's rotation
+  //  translate(50, 100);  // Move the origin to the middle of the line (50, 100)
+
+  //  // Map the mouseX position to an angle (between 0 and 90 degrees)
+  //  let angle = map(mouseX, 0, width, 0, 90);
+ 
+  //  // Rotate the canvas by the mapped angle
+  //  rotate(angle);
+ 
+  //  // Draw the line
+  //  line(0, -50, 0, 50);  // The line rotates around the origin (0,0) after translation
+
+// Number of lines and spacing between them
+let numLines = 5;
+let lineSpacing = 60;
+
+// Map the mouseX position to an angle (between 0 and 90 degrees)
+let angle = map(mouseX, 0, width, 0, 90,true);
+
+// Loop to draw multiple lines
+for (let i = 0; i < numLines; i++) {
+  // Save the current state of transformations
   push();
-  if(player) fill('blue');
-  else fill('red');
-  circle(mouseX, mouseY, 50);
+
+  // Translate to the starting point of the current line
+  translate(50 + i * lineSpacing, 100);
+
+  // Rotate the canvas by the mapped angle
+  rotate(angle);
+
+  // Draw the line (centered at the translated origin)
+  line(0, -50, 0, 50);
+
+  // Restore the original state
   pop();
-
-
+}
 }
 
-
-function mousePressed() {
-  player = !player;
-}
-function hide(){
-  fill('black');
-  //H
-  rect(50,50,20,500);
-  rect(100,50,20,500);
-  rect(50,300,50,50);
-  // for(let i=0;i<230;i+=50){
-  //   rect(50,560+i,20,20);
-  //   //rect(425,590,100,20);
-  // }
-  // for(let i=0;i<230;i+=50){
-  //   rect(100,560+i,20,20);
-  //   //rect(425,590,100,20);
-  // }
-
-
-  //I
-  rect(175,50,20,500);
-  // for(let i=0;i<230;i+=50){
-  //   rect(175,560+i,20,20);
-  //   //rect(425,590,100,20);
-  // }
-
-  //D
-  rect(250,50,20,500);
-  rect(250,50,100,50);
-  rect(250,500,100,50);
-  rect(350,50,20,500);
-  for (let i = 0; i <= 500; i += 3) { 
-    line(250, i+50, 350,i+50); 
-  }
-
-  // for(let i=0;i<230;i+=50){
-  //   rect(250,560+i,120,20);
-  //   //rect(425,590,100,20);
-  // }
-
-
-
-  //E
-  rect(425,50,20,500);
-  rect(425,300,100,50);
-  rect(425,50,100,50);
-  rect(425,500,100,50);
-  // for(let i=0;i<230;i+=30){
-  //   rect(425,560+i,100,20);
-  //   //rect(425,590,100,20);
-  // }
-
-}
-function stc(sentence){
-  let words = []; 
-  words = sentence.split(" "); 
-
-  let randx = random(-30,30);
-  let randy =random(-20,20);
-  let randstart = random(10,80);
-  let x = randstart;
-  let y = 50;
-  
-  for (let i = 0; i < words.length; i++) {
-  text(words[i],x,y);
-  x+=30+randx;
-  y+=65+randy;
-  // x+=30;
-  // y+=65;
-  // text(words[1],300,100);
-  // text(words[2],300,150);
-  // text(words[3],300,200);
-  // text(words[4],300,250);
-  // text(words[5],300,300);
-  // text(words[6],300,350);
-  // text(words[7],300,400);
-  // text(words[8],300,450);
-  // text(words[9],300,500);
-  // text(words[10],300,550);
-  // text(words[11],300,750);
-  }
-}
-function drawDiagonalRectangle(x, y, w, h, angle) {
-  push(); // Save the current transformation state
-  translate(x, y); // Move the origin to (x, y)
-  rotate(radians(angle)); // Rotate by the specified angle
-
-  // Draw a rectangle with the current rotation
-  beginShape();
-  vertex(0, 0);        // Top-left corner
-  vertex(w, 0);        // Top-right corner
-  vertex(w, h);        // Bottom-right corner
-  vertex(0, h);        // Bottom-left corner
-  endShape(CLOSE);     // Close the shape
-
-  pop(); // Restore the transformation state
-}

@@ -11,9 +11,9 @@ function draw() {
     line(i, 0, i, height); 
   }
 
-  hide();
+  //hide();
   //seek();
-
+  stc("Moving WOrds around");
 
 
 
